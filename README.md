@@ -16,19 +16,23 @@ I needed a portfolio website that looks good and helps me track who's interested
 
 ## The Cool Part
 
-When someone downloads my resume, I get to know:
-- Their name and email (they fill a quick form)
+When someone downloads my resume, they just need to sign in with their Google account. That's it! No boring forms to fill.
+
+I get to know:
+- Their name and email (from their Google account)
 - What device/browser they used
 - When they downloaded it
 
-This helps me follow up with recruiters and potential collaborators. All data goes to Firebase Firestore.
+This helps me follow up with recruiters and potential collaborators. All data goes to Firebase Firestore, and they stay signed in only for the download - then automatically signed out for privacy.
 
 ## Tech I Used
 
 - Flutter (obviously! 🦋)
-- Firebase for storing download info
+- Firebase Authentication (Google Sign-In)
+- Firebase Firestore for storing download info
 - Material Design 3 for the UI
 - Google Fonts because default fonts are boring
+- Platform-specific code for web vs mobile
 
 ## Running This Locally
 
@@ -52,21 +56,26 @@ flutter run -d chrome
 Started with the basics:
 1. Created sections (Hero, About, Projects, etc.)
 2. Made it responsive (looks good on phone, tablet, desktop)
-3. Added Firebase to track resume downloads
-4. Spent way too much time tweaking spacing and colors 😅
+3. Added Firebase Authentication with Google Sign-In
+4. Set up Firestore to track resume downloads
+5. Spent way too much time tweaking spacing and colors 😅
+
+The Google Sign-In was tricky - had to make it work differently for web (popup) and mobile (credential flow).
 
 ## Things I Learned
 
-- Firebase integration with Flutter web
-- Making forms that don't look ugly
+- Firebase Authentication with Google Sign-In (web vs mobile is different!)
+- Platform-specific code in Flutter (kIsWeb, conditional imports)
+- Making buttons that look consistent across platforms
 - Responsive design is harder than it looks
-- User experience matters (a lot!)
+- User experience matters - one-click Google Sign-In beats boring forms!
 
 ## Known Issues
 
-- Google Sign-In on mobile needs SHA-1 setup (documented in `ANDROID_GOOGLE_SIGNIN_SETUP.md`)
-- Resume download is web-only for now (working on mobile version)
+- Google Sign-In on Android needs SHA-1 fingerprint setup (documented in `ANDROID_GOOGLE_SIGNIN_SETUP.md`)
+- Mobile download uses Google Sign-In properly now, but needs Firebase config
 - Some spacing issues on very small screens (fixing soon)
+- Download tracking works best on web, mobile testing ongoing
 
 ## What's Next?
 
