@@ -92,7 +92,7 @@ I'm Divya Pawar, a Flutter Developer currently working at Jio Platforms Limited 
 - 📧 Email: divyapawar9420@gmail.com
 - 💼 LinkedIn: [divya-pawar-85821b222](https://www.linkedin.com/in/divya-pawar-85821b222)
 - 🐙 GitHub: [divya-pawar](https://github.com/divya-pawar)
-- 📱 Phone: +91 9420626655
+- 📱 Phone: +91 7020709761
 
 ## Want to Use This?
 
@@ -102,15 +102,6 @@ Feel free to fork it and make it your own! Just:
 3. Add your own profile pic and resume
 4. Customize the colors/theme to your taste
 
-## A Quick Thanks
-
-- Flutter team for making cross-platform development actually enjoyable
-- Firebase for making backend stuff easy
-- Stack Overflow for... well, everything 😂
-- Coffee ☕
-
----
-
-**Built with Flutter 💙**
+**Built with Flutter**
 
 *P.S. - If you download my resume and like what you see, let's talk! Always open to interesting opportunities.*
