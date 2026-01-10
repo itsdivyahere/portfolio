@@ -1,10 +1,8 @@
 [build]
-  command = "flutter build web --release"
   publish = "build/web"
+  command = "echo 'Please build locally and push build/web folder'"
 
-[build.environment]
-  FLUTTER_VERSION = "stable"
-
-[[plugins]]
-  package = "@flutterdevs/netlify-plugin-flutter"
-
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
