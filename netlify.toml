@@ -1,0 +1,10 @@
+[build]
+  command = "flutter build web --release"
+  publish = "build/web"
+
+[build.environment]
+  FLUTTER_VERSION = "stable"
+
+[[plugins]]
+  package = "@flutterdevs/netlify-plugin-flutter"
+
