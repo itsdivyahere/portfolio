@@ -38,7 +38,7 @@ class ResumeDownloadService {
       });
 
       // Trigger resume download immediately (don't wait for tracking to complete)
-      download_helper.downloadFile(
+      await download_helper.downloadFile(
         'assets/resume/Divya_Pawar_Resume.pdf',
         'Divya_Pawar_Resume.pdf',
       );
@@ -47,7 +47,7 @@ class ResumeDownloadService {
         print('Error downloading resume: $e');
       }
       // Still try to download even if tracking fails
-      download_helper.downloadFile(
+      await download_helper.downloadFile(
         'assets/resume/Divya_Pawar_Resume.pdf',
         'Divya_Pawar_Resume.pdf',
       );
