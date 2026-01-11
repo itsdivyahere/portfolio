@@ -16,23 +16,22 @@ I needed a portfolio website that looks good and helps me track who's interested
 
 ## The Cool Part
 
-When someone downloads my resume, they just need to sign in with their Google account. That's it! No boring forms to fill.
+When someone downloads my resume, it's instant - no sign-ups, no forms, no friction. Just click and download!
 
-I get to know:
-- Their name and email (from their Google account)
-- What device/browser they used
-- When they downloaded it
+Behind the scenes, I track anonymous analytics:
+- Device type and browser
+- Download timestamp
+- Approximate location (via IP - anonymized)
 
-This helps me follow up with recruiters and potential collaborators. All data goes to Firebase Firestore, and they stay signed in only for the download - then automatically signed out for privacy.
+This helps me understand who's interested in my work without being invasive. The tracking is non-blocking - if it fails, the download still works. Privacy matters!
 
 ## Tech I Used
 
 - Flutter (obviously! 🦋)
-- Firebase Authentication (Google Sign-In)
-- Firebase Firestore for storing download info
+- Firebase Firestore for anonymous download analytics
 - Material Design 3 for the UI
 - Google Fonts because default fonts are boring
-- Platform-specific code for web vs mobile
+- Platform-specific code for web vs mobile downloads
 
 ## Running This Locally
 
@@ -56,33 +55,34 @@ flutter run -d chrome
 Started with the basics:
 1. Created sections (Hero, About, Projects, etc.)
 2. Made it responsive (looks good on phone, tablet, desktop)
-3. Added Firebase Authentication with Google Sign-In
-4. Set up Firestore to track resume downloads
+3. Set up Firebase Firestore for anonymous download tracking
+4. Implemented platform-specific file downloads
 5. Spent way too much time tweaking spacing and colors 😅
 
-The Google Sign-In was tricky - had to make it work differently for web (popup) and mobile (credential flow).
+The download tracking was interesting - had to make it work differently for web (dart:html) and mobile (path_provider).
 
 ## Things I Learned
 
-- Firebase Authentication with Google Sign-In (web vs mobile is different!)
+- Anonymous analytics with Firebase Firestore
 - Platform-specific code in Flutter (kIsWeb, conditional imports)
-- Making buttons that look consistent across platforms
+- File downloads across web and mobile
 - Responsive design is harder than it looks
-- User experience matters - one-click Google Sign-In beats boring forms!
+- Sometimes simple is better - no sign-in needed!
 
 ## Known Issues
 
-- Google Sign-In on Android needs SHA-1 fingerprint setup (documented in `ANDROID_GOOGLE_SIGNIN_SETUP.md`)
-- Mobile download uses Google Sign-In properly now, but needs Firebase config
+- Resume download on Android opens in browser (working on saving to Downloads folder)
 - Some spacing issues on very small screens (fixing soon)
-- Download tracking works best on web, mobile testing ongoing
+- IP-based location is approximate and sometimes unavailable
+- Analytics tracking is anonymous - can't follow up with specific users
 
 ## What's Next?
 
-- [ ] Make resume download work on mobile
-- [ ] Add a proper dashboard to view analytics
-- [ ] Maybe add a blog section?
+- [ ] Improve mobile download (save to Downloads folder)
+- [ ] Add a dashboard to view download analytics
+- [ ] Maybe add IP geolocation for better location tracking
 - [ ] Dark mode (everyone wants dark mode)
+- [ ] Add more projects as I build them
 
 ## About Me
 
@@ -91,7 +91,7 @@ I'm Divya Pawar, a Flutter Developer currently working at Jio Platforms Limited 
 **Connect with me:**
 - 📧 Email: divyapawar9420@gmail.com
 - 💼 LinkedIn: [divya-pawar-85821b222](https://www.linkedin.com/in/divya-pawar-85821b222)
-- 🐙 GitHub: [divya-pawar](https://github.com/divya-pawar)
+- 🐙 GitHub: [divya-pawar](https://github.com/itsdivyahere)
 - 📱 Phone: +91 7020709761
 
 ## Want to Use This?

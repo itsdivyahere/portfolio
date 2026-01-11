@@ -1,67 +1,56 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import '../models/download_tracking_model.dart';
-import 'auth_service.dart';
 import 'download_helper.dart' as download_helper;
 
 class ResumeDownloadService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final AuthService _authService = AuthService();
   static const String _collectionName = 'resume_downloads';
 
-  Future<void> downloadResumeWithGoogleSignIn() async {
+  /// Download resume with anonymous tracking (no sign-in required)
+  Future<void> downloadResumeAnonymously() async {
     try {
-      // Sign in with Google
-      final userCredential = await _authService.signInWithGoogle();
-      
-      if (userCredential == null || userCredential.user == null) {
-        throw Exception('Sign-in cancelled or failed');
-      }
-
-      final User user = userCredential.user!;
-      
-      // Get user information from Google account
-      final String userName = user.displayName ?? 'Unknown';
-      final String userEmail = user.email ?? 'Unknown';
-      final String userPhone = user.phoneNumber ?? 'Not provided';
-      
       // Get device and browser info
       final String deviceInfo = download_helper.getDeviceInfo();
       final String browserInfo = download_helper.getBrowserInfo();
       
-      // Get IP address
+      // Get IP address (for location approximation)
       final String ipAddress = await _getIpAddress();
       
-      // Create tracking model
+      // Create anonymous tracking model
       final DownloadTrackingModel trackingData = DownloadTrackingModel(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
-        userName: userName,
-        userEmail: userEmail,
-        userPhone: userPhone,
+        userName: 'Anonymous User',
+        userEmail: 'anonymous@download',
+        userPhone: 'Not collected',
         ipAddress: ipAddress,
         deviceInfo: deviceInfo,
         browserInfo: browserInfo,
         downloadedAt: DateTime.now(),
-        location: 'Unknown',
+        location: 'Unknown', // Could use IP geolocation service if needed
       );
 
-      // Save to Firestore
-      await _saveDownloadTracking(trackingData);
+      // Save to Firestore (non-blocking, don't wait)
+      _saveDownloadTracking(trackingData).catchError((e) {
+        if (kDebugMode) {
+          print('Error saving tracking (non-critical): $e');
+        }
+      });
 
-      // Trigger resume download
+      // Trigger resume download immediately (don't wait for tracking to complete)
       download_helper.downloadFile(
         'assets/resume/Divya_Pawar_Resume.pdf',
         'Divya_Pawar_Resume.pdf',
       );
-      
-      // Sign out after download (optional)
-      await _authService.signOut();
     } catch (e) {
       if (kDebugMode) {
         print('Error downloading resume: $e');
       }
-      rethrow;
+      // Still try to download even if tracking fails
+      download_helper.downloadFile(
+        'assets/resume/Divya_Pawar_Resume.pdf',
+        'Divya_Pawar_Resume.pdf',
+      );
     }
   }
 

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1080123226112",
+    "project_id": "portfolio-50c3f",
+    "storage_bucket": "portfolio-50c3f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080123226112:android:6f397d8e75443d1bac00e5",
+        "android_client_info": {
+          "package_name": "com.divyapawar.portfolio_divya_pawar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080123226112-sq7iqqkjtee48tcfltqimbmgq0l2n5pq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.divyapawar.portfolio_divya_pawar",
+            "certificate_hash": "2052d7ab09c633ab7fab7647aaa51207d9f3240f"
+          }
+        },
+        {
+          "client_id": "1080123226112-dobckno4mg35g3unnh4gg938ld859n6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXQwwcwbHmJ-XjGZtILZImgNUMTmzUbmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080123226112-dobckno4mg35g3unnh4gg938ld859n6b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080123226112-mdf5fcmu6j3pl8hbarl6h97m40dffvb3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.divyapawar.portfolioDivyaPawar"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

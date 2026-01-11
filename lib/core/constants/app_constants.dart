@@ -6,10 +6,10 @@ class AppConstants {
   static const String email = 'divyapawar9420@gmail.com';
   static const String phone = '(+91) 7020709761';
   static const String linkedIn = 'divya-pawar-85821b222';
-  static const String github = 'divya-pawar';
+  static const String github = 'itsdivyahere';
   
   static const String linkedInUrl = 'https://www.linkedin.com/in/divya-pawar-85821b222';
-  static const String githubUrl = 'https://github.com/divya-pawar';
+  static const String githubUrl = 'https://github.com/itsdivyahere';
   static const String emailUrl = 'mailto:divyapawar9420@gmail.com';
   static const String phoneUrl = 'tel:+917020709761';
   

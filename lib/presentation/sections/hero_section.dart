@@ -13,40 +13,29 @@ class HeroSection extends StatelessWidget {
 
   Future<void> _handleResumeDownload(BuildContext context) async {
     try {
-      // Show loading
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-
       final ResumeDownloadService service = ResumeDownloadService();
-      await service.downloadResumeWithGoogleSignIn();
+      
+      // Download immediately (tracking happens in background)
+      await service.downloadResumeAnonymously();
 
-      // Close loading
+      // Show success message
       if (context.mounted) {
-        Navigator.of(context).pop();
-        
-        // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Resume downloaded successfully!'),
+            content: Text('Resume downloaded! 📄'),
             backgroundColor: AppColors.success,
+            duration: Duration(seconds: 2),
           ),
         );
       }
     } catch (e) {
-      // Close loading
+      // Show error message (but download probably still worked)
       if (context.mounted) {
-        Navigator.of(context).pop();
-        
-        // Show error message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error: ${e.toString()}'),
-            backgroundColor: AppColors.error,
+          const SnackBar(
+            content: Text('Download started (tracking may have failed)'),
+            backgroundColor: AppColors.success,
+            duration: Duration(seconds: 2),
           ),
         );
       }
@@ -266,6 +255,8 @@ class HeroSection extends StatelessWidget {
 
   Future<void> _launchUrl(String urlString) async {
     final Uri url = Uri.parse(urlString);
-    if (await canLaunchUrl(url)) await launchUrl(url);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    }
   }
 }
