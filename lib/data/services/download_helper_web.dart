@@ -1,10 +1,33 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
-void downloadFile(String url, String filename) {
-  final anchor = html.AnchorElement(href: url)
-    ..setAttribute('download', filename)
-    ..click();
+void downloadFile(String assetPath, String filename) async {
+  try {
+    // Fetch the asset file as bytes
+    final response = await html.window.fetch(assetPath);
+    final blob = await response.blob();
+    
+    // Create a temporary URL for the blob
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    
+    // Create anchor element and trigger download
+    final anchor = html.AnchorElement(href: url)
+      ..setAttribute('download', filename)
+      ..style.display = 'none';
+    
+    html.document.body?.append(anchor);
+    anchor.click();
+    
+    // Clean up
+    anchor.remove();
+    html.Url.revokeObjectUrl(url);
+  } catch (e) {
+    print('Error downloading file: $e');
+    // Fallback: try direct link
+    final anchor = html.AnchorElement(href: assetPath)
+      ..setAttribute('download', filename)
+      ..click();
+  }
 }
 
 String getDeviceInfo() {
